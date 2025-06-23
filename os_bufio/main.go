@@ -13,10 +13,11 @@ var startTime time.Time = time.Now() // фиксируем время старт
 // logtime выводит время выполнения программы
 func logtime() {
 	duration := time.Since(startTime)
-	fmt.Printf("Время выполнения программы: %s\n", duration)
+	fmt.Printf("Время выполнения программы: %v \n", duration)
 }
 
 func main() {
+	lineCount, byteCount := 0, 0
 	defer logtime() // выполнение при завершении main
 
 	// Пути к файлам
@@ -44,7 +45,7 @@ func main() {
 			return
 		}
 		// Печатаем информацию после закрытия out.txt
-		//fmt.Printf("Всего записано строк: %d, байт: %d\n", lineCount, byteCount)
+		fmt.Printf("Всего записано строк: %d, байт: %d\n", lineCount, byteCount)
 	}()
 
 	scanner := bufio.NewScanner(inFile)
@@ -52,9 +53,10 @@ func main() {
 	defer writer.Flush()
 
 	// Чтение строк из in.txt и запись в out.txt с нумерацией
+
 	for scanner.Scan() {
-		var lineCount int
-		var byteCount int
+		//var lineCount int
+		//var byteCount int
 		lineCount++
 		line := scanner.Text()
 		outputLine := fmt.Sprintf("%d: %s\n", lineCount, line)
@@ -64,6 +66,7 @@ func main() {
 			return
 		}
 		byteCount += n
+		//fmt.Println(lineCount, byteCount)
 	}
 
 	if err := scanner.Err(); err != nil {
