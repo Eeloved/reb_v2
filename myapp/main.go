@@ -15,7 +15,7 @@ func main() {
 
 	color.Cyan("Hello, World!")
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 1; i++ {
 		fmt.Println(wordz.Hello)
 		fmt.Println(wordz.Random())
 	}
