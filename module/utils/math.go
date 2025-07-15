@@ -9,12 +9,3 @@ func Add(a, b int) int {
 func PrintHello() {
 	fmt.Println("Hello from utils!")
 }
-
-func Contains(a []string, x string) bool {
-	for _, n := range a {
-		if x == n {
-			return true
-		}
-	}
-	return false
-}

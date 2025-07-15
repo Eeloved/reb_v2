@@ -2,6 +2,8 @@ package iternal
 
 import "errors"
 
+const DEFAULT_DISCOUNT = 500
+
 type Customer struct {
 	Name         string
 	Age          int
