@@ -5,7 +5,7 @@ import (
 	"m4_01/iternal"
 )
 
-//const DEFAULT_DISCOUNT = 500
+//
 
 func main() {
 	cust := iternal.NewCustomer("Dima", 23, 10000, 1000, true)
