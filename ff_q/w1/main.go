@@ -46,3 +46,18 @@ func main() {
 	fmt.Println("Программа завершена")
 }
 */
+
+/*
+
+func sum(nums []int) (total int) {
+	for _, n := range nums {
+		total += n
+	}
+	return // "naked return"
+}
+
+func main() {
+	nums := []int{1, 2, 3, 4}
+	fmt.Println(sum(nums)) // 10
+}
+*/
