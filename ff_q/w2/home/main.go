@@ -2,23 +2,24 @@ package main
 
 import (
 	"fmt"
+	"myapp/shapes"
 )
 
-type Rectangle struct {
-	Width  float64
-	Height float64
-}
-
-func (r Rectangle) Aera() float64 {
-	return r.Width * r.Height
-}
-
-func (r Rectangle) Perimeter() float64 {
-	return 2 * (r.Width + r.Height)
+func printArea(a shapes.Areaer) {
+	fmt.Println("ploshad", a.Area())
 }
 
 func main() {
-	r := Rectangle{Width: 10, Height: 5}
-	fmt.Println(r.Aera())
+	r := shapes.Rectangle{Width: 10, Height: 5}
+	fmt.Println(r.Area())
 	fmt.Println(r.Perimeter())
+
+	r.Scale(2)
+	fmt.Println(r.Area())
+
+	printArea(r)
+
+	c := shapes.Circle{Radius: 5}
+	fmt.Println(c.Area())
+	printArea(c)
 }
