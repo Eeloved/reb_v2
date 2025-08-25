@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"strings"
+	"encoding/json"
+	"log"
 )
 func mapFunc() {
 
@@ -36,11 +38,42 @@ func jsonMe() {
 		Age int `json:"Age"`
 	}
 
+	users := User{Name: "Alice", Age: 25}
+/*	users := []User{
+		{Name: "Alice", Age: 25},
+		{Name: "Jhon", Age: 33},
+		{Name: "Alex", Age: 12},
+	}
+*/
+	data, err := json.Marshal(users)
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	fmt.Println("Json:", string(data))
+	//fmt.Println("Json:", data)
+	//fmt.Println(users)
+
+    var loadedUsers User
+	err = json.Unmarshal(data, &loadedUsers)
+    if err != nil {
+        log.Fatal(err)
+	}
+	//fmt.Println("Struct:", loadedUsers)
+	fmt.Printf("Имя: %s, Возраст: %d\n", loadedUsers.Name, loadedUsers.Age)
+	
 }
+
 func main() {
 	//mapFunc() // name if ages > 18
 	//fmt.Println(WordCount("Hello world Go")) // 3
+	jsonMe()
 
 
 }
+
+
+/*    data, err := json.Marshal(users)
+    if err != nil {
+        log.Fatal(err)
+    } */

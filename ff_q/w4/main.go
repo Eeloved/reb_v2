@@ -58,6 +58,8 @@ func userStruct() {
 
 	fmt.Println(string(data))
 
+	var 
+
 }
 
 func main() {
