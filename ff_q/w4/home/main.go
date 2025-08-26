@@ -114,11 +114,87 @@ func readJson() {
 		fmt.Println("Name:", users.Name)
 	}
 	fmt.Println("Names:", names)
+
+	for _, u := range loadedUsers {
+        log.Println("Взрослый:", u.Name)
+		
+	}
+}
+func ParseAge(ageStr string) (int, error) {
+    age, err := strconv.Atoi(ageStr)
+    if err != nil {
+        return 0, err
+    }
+    return age, nil
 }
 
-func ParseAge(ageStr string) (int, error) {
-	return strconv.Atoi(ageStr)
+func readFileCount(){
+    // Чтение файла
+    content, err := os.ReadFile("text.txt")
+    if err != nil {
+        fmt.Println("Ошибка чтения файла:", err)
+        return
+    }
 
+    // Преобразование содержимого в строку и разделение на слова
+    text := string(content)
+    words := strings.Fields(text)
+
+    // Подсчет слов
+    wordCount := len(words)
+
+    // Вывод результата
+    fmt.Printf("Количество слов в файле: %d\n", wordCount)
+}
+
+func configJson(){
+
+	type Config struct {
+		Port    int    `json:"port"`
+		Host    string `json:"host"`
+		Debug   bool   `json:"debug"`
+	}
+
+
+    // Create config.json file
+    config := Config{
+        Port:  8080,
+        Host:  "localhost",
+        Debug: true,
+    }
+
+    // Write config to file
+    configData, err := json.MarshalIndent(config, "", "    ")
+    if err != nil {
+        fmt.Printf("Error marshaling config: %v\n", err)
+        return
+    }
+
+    err = os.WriteFile("config.json", configData, 0644)
+    if err != nil {
+        fmt.Printf("Error writing config file: %v\n", err)
+        return
+    }
+
+    // Read config from file
+    fileData, err := os.ReadFile("config.json")
+    if err != nil {
+        fmt.Printf("Error reading config file: %v\n", err)
+        return
+    }
+
+    // Unmarshal JSON into Config struct
+    var loadedConfig Config
+    err = json.Unmarshal(fileData, &loadedConfig)
+    if err != nil {
+        fmt.Printf("Error unmarshaling config: %v\n", err)
+        return
+    }
+
+    // Print loaded config values
+    fmt.Printf("Port: %d\n", loadedConfig.Port)
+    fmt.Printf("Host: %s\n", loadedConfig.Host)
+    fmt.Printf("Debug: %v\n", loadedConfig.Debug)
 }
 
 func main() {
@@ -128,6 +204,17 @@ func main() {
 	//saveJson()
 	//readJson()
 
+
+/*	fmt.Println(ParseAge("adb"))
+	age, err := ParseAge("25")
+    if err != nil {
+        fmt.Println("Ошибка:", err)
+    } else {
+        fmt.Println("Возраст:", age)
+    } */
+
+	//readFileCount()
+	configJson()
 }
 
 /*    data, err := json.Marshal(users)
